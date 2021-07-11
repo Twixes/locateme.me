@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from '@emotion/react'
+import { css, keyframes } from '@emotion/react'
 import { ErrorBoundary } from '@sentry/react'
 import { FallbackRender } from '@sentry/react/dist/errorboundary'
 import posthog from 'posthog-js'
@@ -9,6 +9,47 @@ import { useEffect } from 'react'
 import { Route, useHistory } from 'react-router-dom'
 
 import { capitalize } from '../utils'
+
+const INITIAL_WAIT_MS = 1000
+const WAIT_EXPONENT = 0.85
+
+const loadingMessages = [
+    'intercepting DNS queries',
+    'consulting IP databases',
+    'analyzing signal strength',
+    'straightening elliptic curves',
+    'checking available fonts',
+    'triangulating based on latency',
+    'demolishing the firewall',
+    'subpoenaing your ISP',
+    'calculating block hash',
+    'munching on browser cookies',
+    'pulling satellite imagery',
+    'inspecting nudes',
+    'combing through tax records',
+    'throwing darts',
+    'cross-matching Interpol warrants',
+    'tossing a coin',
+]
+
+// Randomize messages a little
+for (let i = 0; i < loadingMessages.length - 1; i++) {
+    if (Math.random() >= 0.5) {
+        const temp = loadingMessages[i]
+        loadingMessages[i] = loadingMessages[i+1]
+        loadingMessages[i+1] = temp
+    }
+}
+
+const waitTotalMs = Math.round(INITIAL_WAIT_MS * (1 - WAIT_EXPONENT**loadingMessages.length) / (1 - WAIT_EXPONENT))
+
+const loading = keyframes`
+    from {
+        width: 0%;
+    } to {
+        width: 100%;
+    }
+`
 
 const main = css({
     margin: '1rem auto',
@@ -38,6 +79,7 @@ const loadingButtonInside = css({
     overflow: 'hidden',
     '::before': {
         content: '""',
+        transition: 'width 200ms ease',
         position: 'absolute',
         top: 0,
         left: 0,
@@ -47,27 +89,16 @@ const loadingButtonInside = css({
     }
 })
 
+const loadingButtonInsideProgress = css({
+    '::before': {
+        animation: `${loading} ${waitTotalMs}ms cubic-bezier(.2,.4,.9,.4) forwards`
+    }
+})
+
 const loadingButtonText = css({
     position: 'relative'
 })
 
-const loadingMessages = [
-    'intercepting DNS queries',
-    'consulting IP databases',
-    'decrypting HTTPS traffic',
-    'analyzing signal strength',
-    'triangulating based on latency',
-    'demolishing the firewall',
-    'subpoenaing your ISP',
-    'munching on browser cookies',
-    'inspecting nudes',
-    'combing through tax records',
-    'cross-matching Interpol warrants',
-    'tossing a coin'
-]
-
-const INITIAL_WAIT_MS = 1000
-const WAIT_EXPONENT = 0.8
 
 export default function App(): JSX.Element {
     const history = useHistory()
@@ -93,7 +124,7 @@ export default function App(): JSX.Element {
 
     return (
         <main css={main}>
-            {loadingMessage ? <button css={loadingButton}><div css={loadingButtonInside}><span css={loadingButtonText}>{`${capitalize(loadingMessage)}…`}</span></div></button> : <><h1>You are</h1>
+            {loadingMessage ? <button css={loadingButton}><div css={[loadingButtonInside, loadingButtonInsideProgress]}><span css={loadingButtonText}>{`${capitalize(loadingMessage)}…`}</span></div></button> : <><h1>You are</h1>
             <img src="/point.png" style={{maxWidth: '12rem'}} />
             <h1>right there</h1></>}
         </main>
