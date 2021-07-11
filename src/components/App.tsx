@@ -1,12 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
 import { css, keyframes } from '@emotion/react'
-import { ErrorBoundary } from '@sentry/react'
-import { FallbackRender } from '@sentry/react/dist/errorboundary'
 import posthog from 'posthog-js'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import { Route, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import { capitalize } from '../utils'
 
