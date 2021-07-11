@@ -1,5 +1,6 @@
 {
   "name": "locateme",
+  "description": "Wherever you are, find out where you are",
   "version": "0.1.0",
   "private": true,
   "scripts": {
