@@ -4,8 +4,7 @@ export function capitalize(text: string): string {
 }
 
 export function updatePageTitle(title: string): void {
-    const titleElement = document.querySelector('title')
-    titleElement!.innerText = title
+    document.title = title
 }
 
 export function scare(): void {
