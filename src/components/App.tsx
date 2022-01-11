@@ -2,11 +2,12 @@
 
 import { css, keyframes } from '@emotion/react'
 import posthog from 'posthog-js'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { capitalize } from '../utils'
+import { Globe } from './COBE'
 
 const INITIAL_WAIT_MS = 1000
 const WAIT_EXPONENT = 0.85
@@ -23,14 +24,14 @@ const loadingMessages = [
     'calculating block hash',
     'munching on browser cookies',
     'pulling satellite imagery',
-    'inspecting nudes',
     'combing through tax records',
     'throwing darts',
     'cross-matching Interpol warrants',
     'tossing a coin',
+    'inspecting nudes',
 ]
 
-// Randomize messages a little
+// Randomize messages just a little
 for (let i = 0; i < loadingMessages.length - 1; i++) {
     if (Math.random() >= 0.5) {
         const temp = loadingMessages[i]
@@ -101,8 +102,10 @@ const loadingButtonText = css({
 export default function App(): JSX.Element {
     const history = useHistory()
     const [waitIteration, setWaitIteration] = useState(0)
+    const waitIterationRef = useRef(waitIteration)
 
     useEffect(() => {
+        waitIterationRef.current = waitIteration
         if (waitIteration < loadingMessages.length) {
             const timer = setTimeout(() => {
                 setWaitIteration(prevState => prevState + 1)
@@ -119,12 +122,35 @@ export default function App(): JSX.Element {
     })
 
     const loadingMessage = loadingMessages[waitIteration]
+    let phi = 0.0;
 
     return (
         <main css={main}>
             {loadingMessage ? <button css={loadingButton}><div css={[loadingButtonInside, loadingButtonInsideProgress]}><span css={loadingButtonText}>{`${capitalize(loadingMessage)}…`}</span></div></button> : <><h1>You are</h1>
             <img src="/point.png" style={{maxWidth: '12rem'}} />
             <h1>right there</h1></>}
+            <Globe
+        devicePixelRatio={2}
+        width={500 * 2}
+        height={500 * 2}
+        phi={0}
+        theta={0}
+        dark={1}
+        diffuse={1.2}
+        mapSamples={16000}
+        mapBrightness={6}
+        baseColor={[0.3, 0.3, 0.3]}
+        markerColor={[0.1, 0.8, 1]}
+        glowColor={[1, 1, 1]}
+        markers={[
+          { location: [37.7595, -122.4367], size: 0.03},
+          { location: [40.7128, -74.006], size: 0.1 }
+        ]}
+        onRender={(state) => {
+          state.phi = phi;
+          phi += 0.01 / WAIT_EXPONENT ** waitIterationRef.current;
+        }}
+      />
         </main>
     )
 }
