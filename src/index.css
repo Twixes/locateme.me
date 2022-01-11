@@ -2,7 +2,7 @@
 :root {
     --color-brand-start: #ff067b;
     --color-brand-end: #ff8422;
-    --font-family-stack: 'Inter', 'Roboto', 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-family-stack: 'Spline Sans', sans-serif;
     --timing-function-standard: cubic-bezier(0.4, 0, 0.2, 1);
 }
 

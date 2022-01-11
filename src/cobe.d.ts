@@ -1,37 +1,44 @@
-import Phenomenon from 'phenomenon'
-
-const OPT_PHI = "phi";
-const OPT_THETA = "theta";
-const OPT_DOTS = "mapSamples";
-const OPT_MAP_BRIGHTNESS = "mapBrightness";
-const OPT_BASE_COLOR = "baseColor";
-const OPT_MARKER_COLOR = "markerColor";
-const OPT_GLOW_COLOR = "glowColor";
-const OPT_MARKERS = "markers";
-const OPT_DIFFUSE = "diffuse";
-const OPT_DPR = "devicePixelRatio";
-const OPT_DARK = "dark";
-
 declare module "cobe" {
-    export interface Marker {
-        location: [number, number];
-        size: number;
+    import Phenomenon from "phenomenon";
+
+    declare namespace OptionKey {
+      const OPT_PHI = "phi";
+      const OPT_THETA = "theta";
+      const OPT_DOTS = "mapSamples";
+      const OPT_MAP_BRIGHTNESS = "mapBrightness";
+      const OPT_BASE_COLOR = "baseColor";
+      const OPT_MARKER_COLOR = "markerColor";
+      const OPT_GLOW_COLOR = "glowColor";
+      const OPT_MARKERS = "markers";
+      const OPT_DIFFUSE = "diffuse";
+      const OPT_DPR = "devicePixelRatio";
+      const OPT_DARK = "dark";
     }
 
-    export interface Options {
-        [OPT_PHI]: number,
-        [OPT_THETA]: number,
-        [OPT_DOTS]: number,
-        [OPT_MAP_BRIGHTNESS]: number,
-        [OPT_BASE_COLOR]: string,
-        [OPT_MARKER_COLOR]: string,
-        [OPT_GLOW_COLOR]: string,
-        [OPT_MARKERS]: Marker[],
-        [OPT_DIFFUSE]: number,
-        [OPT_DPR]: number,
-        [OPT_DARK]: number,
-      }
+    export interface Marker {
+      location: [number, number];
+      size: number;
+    }
 
-    function createGlobe(canvas: HTMLCanvasElement, opts: Options): void;
-    export = createGlobe;
-  }
+    export interface COBEOptions {
+      width: number;
+      height: number;
+      onRender: (state: Record<string, any>) => void;
+      [OptionKey.OPT_PHI]: number;
+      [OptionKey.OPT_THETA]: number;
+      [OptionKey.OPT_DOTS]: number;
+      [OptionKey.OPT_MAP_BRIGHTNESS]: number;
+      [OptionKey.OPT_BASE_COLOR]: [number, number, number];
+      [OptionKey.OPT_MARKER_COLOR]: [number, number, number];
+      [OptionKey.OPT_GLOW_COLOR]: [number, number, number];
+      [OptionKey.OPT_MARKERS]: Marker[];
+      [OptionKey.OPT_DIFFUSE]: number;
+      [OptionKey.OPT_DPR]: number;
+      [OptionKey.OPT_DARK]: number;
+    }
+
+    export default function createGlobe(
+      canvas: HTMLCanvasElement,
+      opts: COBEOptions
+    ): Phenomenon;
+}
