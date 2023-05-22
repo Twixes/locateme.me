@@ -9607,12 +9607,13 @@ postcss@^8.1.0:
     nanoid "^3.1.20"
     source-map "^0.6.1"
 
-posthog-js@^1.11.4:
-  version "1.11.4"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.11.4.tgz#b606e3157421dfa311ef8e023bda7066fd145fe0"
-  integrity sha512-LzbBLU7k4k+yrk9q14sfZpAT9NhgVDcZNGMXB9E35kxWxR/T7U2Y1p0VdcpYRAEyY0u/CP4fLV3UWsrMT50yWA==
+posthog-js@^1.57.2:
+  version "1.57.2"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.57.2.tgz#131fb93e2ad099baff4317f3d91a4d6c96a08e7f"
+  integrity sha512-ER4gkYZasrd2Zwmt/yLeZ5G/nZJ6tpaYBCpx3CvocDx+3F16WdawJlYMT0IyLKHXDniC5+AsjzFd6fi8uyYlJA==
   dependencies:
     fflate "^0.4.1"
+    rrweb-snapshot "^1.1.14"
 
 prelude-ls@^1.2.1:
   version "1.2.1"
@@ -10515,6 +10516,11 @@ rollup@^1.31.1:
     "@types/estree" "*"
     "@types/node" "*"
     acorn "^7.1.0"
+
+rrweb-snapshot@^1.1.14:
+  version "1.1.14"
+  resolved "https://registry.yarnpkg.com/rrweb-snapshot/-/rrweb-snapshot-1.1.14.tgz#9d4d9be54a28a893373428ee4393ec7e5bd83fcc"
+  integrity sha512-eP5pirNjP5+GewQfcOQY4uBiDnpqxNRc65yKPW0eSoU1XamDfc4M8oqpXGMyUyvLyxFDB0q0+DChuxxiU2FXBQ==
 
 rsvp@^4.8.4:
   version "4.8.5"
