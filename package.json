@@ -11,10 +11,7 @@
     "repository": "github:Twixes/locateme",
     "homepage": "https://locateme.me",
     "private": true,
-    "engines": {
-        "node": ">=18.*.*",
-        "yarn": "1.*.*"
-    },
+    "packageManager": "yarn@1.22.22",
     "scripts": {
         "build": "react-scripts build",
         "start": "react-scripts start",
