@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom'
 
 import { ActionButton } from './ui/ActionButton'
 import { EnhancedGlobe } from './ui/EnhancedGlobe'
-import { buttonContainer, globalStyles, globeContainer, main } from './ui/GlobeStyles'
+import { buttonContainer, globalStyles, main } from './ui/GlobeStyles'
 import { ResultContent } from './ui/ResultContent'
 
 const INITIAL_WAIT_MS = 1000

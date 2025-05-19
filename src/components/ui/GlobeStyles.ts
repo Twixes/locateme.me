@@ -88,16 +88,6 @@ export const main = css({
     },
 })
 
-export const globeContainer = css({
-    position: 'relative',
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'hidden',
-})
-
 export const buttonContainer = css({
     position: 'absolute',
     top: '50%',
