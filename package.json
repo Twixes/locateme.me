@@ -25,13 +25,13 @@
         "prepare": "husky install"
     },
     "resolutions": {
-       "@types/react": "17.0.30"
+        "@types/react": "17.0.30"
     },
     "dependencies": {
         "@sentry/react": "^6.8.0",
         "cobe": "^0.4.1",
         "focus-visible": "^5.2.0",
-        "framer-motion": "^4.1.17",
+        "framer-motion": "6",
         "posthog-js": "^1.11.4",
         "react": "^17.0.2",
         "react-cookie": "^4.0.3",
